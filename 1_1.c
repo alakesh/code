@@ -1,4 +1,5 @@
-/* Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data structures */
+/* Implement an algorithm to determine if a string has all unique characters.
+ *What if you cannot use additional data structures */
 
 /* Algorithm
  * Maximum length of a string which has all characters unique is 128

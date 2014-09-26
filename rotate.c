@@ -4,7 +4,7 @@
 
 /* Rotate a given array of numbers of size S by P steps without using any 
  * additional space 
- * Complexity of 1 step rotation is 1   O(N);
+ * Complexity of 1 step rotation for array of size N is O(N);
  */
 
 

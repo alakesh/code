@@ -7,6 +7,32 @@
  * Complexity of 1 step rotation for array of size N is O(N);
  */
 
+/* Algorithm
+ *
+ * Take an example of  5 numbers that we need to rotate by 1 step
+ *                A    B    C   D   E
+ * So start with  swap (A, B). The new array becomes
+ *                B    A    C   D   E
+ * 1st swap moves A to the right destination location
+ * Now repeat it for B but this time to B's new location which is 1 more than A
+ * So swap(B,C)
+ * 				  C    A    B   D   E
+ * Repeat this till E
+ *
+ * In a nutshell, it will look like this
+ *
+ * 				A B C D E
+ * swap(0,1)    B A C D E
+ * swap(0,2)    C A B D E
+ * swap(0,3)    D A B C E
+ * swap(0,4)    E A B C D
+ *
+ *
+ *
+ * The idea is to use location 0 as a temporary location
+ * Repeat the above for N steps
+ */
+
 
 int *arr = NULL;
 

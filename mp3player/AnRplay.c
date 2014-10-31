@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+
 struct mp3frame_h {
     uint16_t frame_sync_bits    : 11;
     uint8_t mpeg_audio_version  : 2;
@@ -41,18 +42,72 @@ void print_frame (void *p){
     printf("emphasis:       %x \n", f->emphasis); 
 }
 
+int is_id3(char *p, char *e)
+{
+	if (p > e) return 0;
+	if (e - p < 10) return 0;
+	if (p[0] == 'I' && p[1] == 'D' && p[2] == '3') {
+		return 1;
+	}
+	return 0;
+}
+
+int is_mp3_frame(char *p, char *e)
+{
+	if (p > e) return 0;
+	if (e - p < 4) return 0;
+
+	/* look for sync pattern */
+	if (p[0] == 0xff && (p[1] & 0xe0) = 0xe0) {
+		return 1;
+	}
+	return 0;
+}
 
 int main(int argc, char *argv[])
 {
     FILE *f = fopen(argv[1], "r");
-    struct mp3frame_h *fr = (struct mp3frame_h *)malloc(sizeof(struct mp3frame_h));
-    if (fr) {
-        fread((void *)fr, sizeof(struct mp3frame_h), 1, f);
-        print_frame((void *)fr);
-        free(fr);
-    }
+	unsigned char *buf, *p, *e, *q;
+	long length, skip;
+	long hbytes = 0;
+	fseek(f, 0, SEEK_END);
+	length = ftell(f);
+	if (length <= 0) {
+		fprintf(stderr, "could not find end of file \n");
+		return 1;
+	}
 
+	fprintf(stdout, "file has %ld bytes \n", length);
+	fseek(f, 0, SEEK_SET);
+
+	buf = malloc(length);
+	if (!buf) {
+		fprintf(stderr, "could not allocate buffer for file data %ld bytes\n",
+				length);
+		return 2;
+	}
+	if (fread(buf, 1, length, f) < length) {
+		fprintf(stderr, "could not read the whole file \n");
+		return 3;
+	}
+
+	e = buf + length - 2;
+	p = buf;
+	q = p;
+
+	while (p < e) {
+		if(is_id3(p, e)) {
+			/* adjust pointers */
+			p = p + 10;
+			q = p;
+		} else if(is_mp3_frame(p, e)) {
+			/* read mp3 frame */
+			/* dump frame info */
+		}
+	}
+
+	free(buf);
     if(f)
         fclose(f);
-      
+	return 0;
 }

@@ -1,3 +1,8 @@
+/* A simple version of game of life 
+ * 
+ * By <Alakesh.Haloi@gmail.com>
+ **/
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>

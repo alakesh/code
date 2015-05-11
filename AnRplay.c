@@ -1,4 +1,4 @@
-/************** A Simple MP3 Player for linux command line ********************
+/************** A Simple future MP3 Player for linux command line ************
  * Written by Alakesh Haloi { alakesh.haloi@gmail.com }
  *
  * For mp3 info refer to http://www.mpgedit.org/mpgedit/mpeg_format/mpeghdr.htm

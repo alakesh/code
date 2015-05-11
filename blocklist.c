@@ -1,3 +1,7 @@
+/* Test program to check file system blocks used by a file
+ * <Alakesh.Haloi@gmail.com>
+ **/
+
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -5,8 +9,6 @@
 #include <linux/fs.h>
 #include <unistd.h>
 #include <fcntl.h>
-
-/* Program to print list of blocks used by a file */
 
 
 int main(int argc, char *argv[]){
